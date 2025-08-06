@@ -1,0 +1,24 @@
+{
+  "name": "com.hartslagnu.app",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {},
+  "devDependencies": {
+    "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harmenkuijer/homey-mijnhartslagnu.git"
+  },
+  "keywords": [],
+  "author": "Harmen Kuijer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harmenkuijer/homey-mijnhartslagnu/issues"
+  },
+  "homepage": "https://github.com/harmenkuijer/homey-mijnhartslagnu#readme",
+  "description": "Homey app for MijnHartslagNu emergency response system integration",
+  "dependencies": {
+    "node-fetch": "^2.7.0"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "oproep_ontvangen",
+  "title": {
+    "en": "Emergency call received",
+    "nl": "Oproep ontvangen"
+  },
+  "titleFormatted": {
+    "en": "Emergency call received: [[omschrijving]]",
+    "nl": "Oproep ontvangen: [[omschrijving]]"
+  },
+  "tokens": [
+    {
+      "name": "omschrijving",
+      "type": "string",
+      "title": {
+        "en": "Description",
+        "nl": "Omschrijving"
+      },
+      "example": {
+        "en": "Cardiac arrest north district",
+        "nl": "Reanimatie noord"
+      }
+    }
+  ]
+}

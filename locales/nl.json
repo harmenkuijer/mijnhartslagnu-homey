@@ -1,0 +1,29 @@
+{
+  "app_name": "MijnHartslagNu",
+  "driver_name": "MijnHartslagNu Apparaat",
+  "pair": {
+    "login": {
+      "title": "Inloggen bij MijnHartslagNu",
+      "description": "Voer je MijnHartslagNu inloggegevens in om je account te verbinden.",
+      "username": "Gebruikersnaam",
+      "password": "Wachtwoord",
+      "button": "Inloggen"
+    },
+    "list_devices": {
+      "title": "Apparaat toevoegen",
+      "description": "Je MijnHartslagNu account is verbonden. Klik op doorgaan om het apparaat toe te voegen.",
+      "continue": "Doorgaan"
+    }
+  },
+  "flow": {
+    "trigger": {
+      "oproep_ontvangen": {
+        "title": "Oproep ontvangen",
+        "titleFormatted": "Oproep ontvangen: [[omschrijving]]",
+        "tokens": {
+          "omschrijving": "Omschrijving"
+        }
+      }
+    }
+  }
+}

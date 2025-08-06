@@ -1,0 +1,29 @@
+{
+  "app_name": "MijnHartslagNu",
+  "driver_name": "MijnHartslagNu Device",
+  "pair": {
+    "login": {
+      "title": "Login to MijnHartslagNu",
+      "description": "Enter your MijnHartslagNu credentials to connect your account.",
+      "username": "Username",
+      "password": "Password",
+      "button": "Login"
+    },
+    "list_devices": {
+      "title": "Add Device",
+      "description": "Your MijnHartslagNu account is connected. Click continue to add the device.",
+      "continue": "Continue"
+    }
+  },
+  "flow": {
+    "trigger": {
+      "oproep_ontvangen": {
+        "title": "Emergency call received",
+        "titleFormatted": "Emergency call received: [[omschrijving]]",
+        "tokens": {
+          "omschrijving": "Description"
+        }
+      }
+    }
+  }
+}

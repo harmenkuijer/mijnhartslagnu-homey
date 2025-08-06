@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add MijnHartslagNu Device</title>
+    <script type="text/javascript" src="/homey.js" data-origin="pairing"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 data-i18n="pair.list_devices.title">Add Device</h1>
+        <p data-i18n="pair.list_devices.description">Your MijnHartslagNu account is connected. Click continue to add the device.</p>
+        
+        <div id="deviceList">
+            <!-- Devices will be populated here -->
+        </div>
+        
+        <button id="continueBtn" data-i18n="pair.list_devices.continue">Continue</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const devices = await Homey.emit('list_devices');
+                const deviceList = document.getElementById('deviceList');
+                
+                if (devices && devices.length > 0) {
+                    devices.forEach(device => {
+                        const deviceDiv = document.createElement('div');
+                        deviceDiv.className = 'device-item';
+                        deviceDiv.innerHTML = `
+                            <h3>${device.name}</h3>
+                            <p>ID: ${device.data.id}</p>
+                        `;
+                        deviceList.appendChild(deviceDiv);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading devices:', error);
+            }
+        });
+
+        document.getElementById('continueBtn').addEventListener('click', async () => {
+            try {
+                await Homey.done();
+            } catch (error) {
+                console.error('Error completing pairing:', error);
+            }
+        });
+    </script>
+
+    <style>
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .device-item {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+        
+        .device-item h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        
+        .device-item p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</body>
+</html>
