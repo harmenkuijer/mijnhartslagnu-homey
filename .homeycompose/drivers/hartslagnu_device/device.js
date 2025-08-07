@@ -21,28 +21,52 @@ class HartslagNuDevice extends Homey.Device {
   }
 
   async startMonitoring() {
-    this.log('Starting emergency call monitoring...');
-    
-    // TODO: Implement actual API polling or websocket connection
-    // For now, simulate periodic checks
+    this.log('🚨 Starten met monitoring van noodoproepen...');
+
+    // Stop eventuele eerdere monitoring
+    if (this.monitoringInterval) {
+      clearInterval(this.monitoringInterval);
+      this.log('Vorige monitoring gestopt.');
+    }
+
+    // Start nieuwe monitoring
     this.monitoringInterval = setInterval(async () => {
       try {
-        await this.checkForEmergencyCalls();
+        const emergencyCalls = await this.checkForEmergencyCalls();
+
+        if (emergencyCalls && emergencyCalls.length > 0) {
+          this.log(`✅ ${emergencyCalls.length} noodoproep(en) gevonden.`);
+          
+          // Verwerk elke oproep
+          emergencyCalls.forEach(call => {
+            this.handleEmergencyCall(call);
+          });
+        } else {
+          this.log('Geen nieuwe noodoproepen.');
+        }
       } catch (error) {
-        this.error('Error checking for emergency calls:', error);
+        this.error('❌ Fout bij het controleren van noodoproepen:', error);
       }
-    }, 30000); // Check every 30 seconds
+    }, 30000); // Elke 30 seconden
   }
 
   async checkForEmergencyCalls() {
-    // TODO: Implement actual API call to check for new emergency calls
-    // const token = await this.getStoreValue('access_token');
-    // const response = await fetch('https://api.mijnhartslagnu.nl/calls', {
-    //   headers: { 'Authorization': `Bearer ${token}` }
-    // });
-    
-    // For now, this is just a placeholder
-    this.log('Checking for emergency calls...');
+    const token = session.getStoreValue('access_token');
+
+    const response = await fetch('https://webapi.heartsafeliving.com/api/Alarm/GetUserAlarmResponse', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('API-fout bij ophalen van noodoproepen');
+    }
+
+    const data = await response.json();
+    return data.calls || [];
   }
 
   async triggerEmergencyCall(description) {
